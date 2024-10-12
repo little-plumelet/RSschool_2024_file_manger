@@ -1,10 +1,11 @@
 import { EOL } from "os";
 import readline from "readline";
 import displayCurrentDirectory from "./functions/displayCurrentDirectory.js";
+import list from "./functions/list.js";
 
 const args = process.argv;
 const usernameArg = args.find((arg) => arg.startsWith("--username="));
-const username = "Anonymous";
+let username = "Anonymous";
 
 const welcomeColor = "\x1b[34m";
 const promptColor = "\x1b[32m";
@@ -21,10 +22,10 @@ const rl = readline.createInterface({
   prompt: `Enter your command: ${resetColor}`,
 });
 
-function handleCommand(command) {
+async function handleCommand(command) {
   switch (command.trim()) {
-    case "list": {
-      listFilesAndFolders();
+    case "ls": {
+      await list();
       break;
     }
     case ".exit": {
