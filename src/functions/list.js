@@ -13,14 +13,14 @@ const list = async () => {
         ).isDirectory();
         return {
           Name: file.name,
-          Type: isDirectory ? "Directory" : "File",
+          Type: isDirectory ? "directory" : "file",
         };
       })
       .sort((a, b) => {
         if (a.Type === b.Type) {
           return a.Name.localeCompare(b.Name);
         }
-        return a.Type === "Directory" ? -1 : 1;
+        return a.Type === "directory" ? -1 : 1;
       });
     console.table(tableData);
   } catch (err) {
