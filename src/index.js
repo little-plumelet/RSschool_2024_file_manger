@@ -1,7 +1,7 @@
 import { EOL } from "os";
 import readline from "readline";
-import displayCurrentDirectory from "./fs/displayCurrentDirectory.js";
-import toUpDirectory from "./fs/toUpDirectory.js";
+import displayCurrentDirectory from "./general/displayCurrentDirectory.js";
+import toUpDirectory from "./general/toUpDirectory.js";
 import copy from "./fs/copy.js";
 import list from "./fs/list.js";
 import read from "./fs/read.js";
@@ -10,7 +10,7 @@ import rename from "./fs/rename.js";
 import calculateHash from "./hash/calcHash.js";
 import compress from "./zip/compress.js";
 import decompress from "./zip/decompress.js";
-import toCertainDirectory from "./fs/toCertainDirectory.js";
+import toCertainDirectory from "./general/toCertainDirectory.js";
 import move from "./fs/move.js";
 import remove from "./fs/delete.js";
 

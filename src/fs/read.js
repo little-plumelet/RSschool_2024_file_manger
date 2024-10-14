@@ -21,7 +21,7 @@ const read = async (filePath) => {
         })
         .on("end", () => resolve())
         .on("error", (err) => {
-          reject(new Error(`FS operation failed ${EOL}${err.message}${EOL}`));
+          reject(new Error(`FS operation failed - ${err.message + EOL}`));
         });
     });
   } catch (error) {

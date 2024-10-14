@@ -24,7 +24,7 @@ const list = async () => {
       });
     console.table(tableData);
   } catch (err) {
-    throw new Error(`FS operation failed - ${(err.message, EOL)}`);
+    throw new Error(`FS operation failed - ${err.message + EOL}`);
   }
 };
 
