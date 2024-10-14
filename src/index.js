@@ -5,6 +5,7 @@ import toUpDirectory from "./fs/toUpDirectory.js";
 import list from "./fs/list.js";
 import read from "./fs/read.js";
 import create from "./fs/create.js";
+import rename from "./fs/rename.js";
 import calculateHash from "./hash/calcHash.js";
 import compress from "./zip/compress.js";
 import decompress from "./zip/decompress.js";
@@ -55,6 +56,11 @@ async function handleCommand(command) {
 
       case "add": {
         await create(args[0]);
+        break;
+      }
+
+      case "rn": {
+        await rename(args[0], args[1]);
         break;
       }
 
