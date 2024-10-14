@@ -7,6 +7,7 @@ import read from "./fs/read.js";
 import calculateHash from "./hash/calcHash.js";
 import compress from "./zip/compress.js";
 import decompress from "./zip/decompress.js";
+import toCertainDirectory from "./fs/toCertainDirectory.js";
 
 const args = process.argv;
 const usernameArg = args.find((arg) => arg.startsWith("--username="));
@@ -36,6 +37,11 @@ async function handleCommand(command) {
         break;
       }
 
+      case "cd": {
+        toCertainDirectory(args[0]);
+        break;
+      }
+
       case "ls": {
         await list();
         break;
@@ -62,9 +68,6 @@ async function handleCommand(command) {
       }
 
       case ".exit": {
-        process.stdout.write(
-          `Thank you for using File Manager, ${username}, goodbye!` + EOL + EOL
-        );
         rl.close();
         break;
       }
@@ -100,7 +103,6 @@ rl.on("line", (input) => {
 rl.on("close", () => {
   process.stdout.write(
     EOL +
-      EOL +
       `${welcomeColor}Thank you for using File Manager, ${username}, goodbye!` +
       EOL +
       EOL
