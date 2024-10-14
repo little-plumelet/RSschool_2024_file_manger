@@ -2,6 +2,7 @@ import { EOL } from "os";
 import readline from "readline";
 import displayCurrentDirectory from "./fs/displayCurrentDirectory.js";
 import toUpDirectory from "./fs/toUpDirectory.js";
+import copy from "./fs/copy.js";
 import list from "./fs/list.js";
 import read from "./fs/read.js";
 import create from "./fs/create.js";
@@ -61,6 +62,11 @@ async function handleCommand(command) {
 
       case "rn": {
         await rename(args[0], args[1]);
+        break;
+      }
+
+      case "cp": {
+        await copy(args[0], args[1]);
         break;
       }
 
