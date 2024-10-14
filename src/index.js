@@ -1,8 +1,9 @@
 import { EOL } from "os";
 import readline from "readline";
-import displayCurrentDirectory from "./functions/displayCurrentDirectory.js";
-import list from "./functions/list.js";
-import read from "./functions/read.js";
+import displayCurrentDirectory from "./fs/displayCurrentDirectory.js";
+import list from "./fs/list.js";
+import read from "./fs/read.js";
+import calculateHash from "./hash/calcHash.js";
 
 const args = process.argv;
 const usernameArg = args.find((arg) => arg.startsWith("--username="));
@@ -37,13 +38,19 @@ async function handleCommand(command) {
         break;
       }
 
-      case "exit": {
+      case "hash": {
+        await calculateHash(args[0]);
+        break;
+      }
+
+      case ".exit": {
         process.stdout.write(
           `Thank you for using File Manager, ${username}, goodbye!` + EOL + EOL
         );
         rl.close();
         break;
       }
+
       default: {
         process.stdout.write(
           EOL +
