@@ -1,7 +1,7 @@
 import { EOL } from "os";
 import readline from "readline";
-import displayCurrentDirectory from "./general/displayCurrentDirectory.js";
-import toUpDirectory from "./general/toUpDirectory.js";
+import displayCurrentDirectory from "./navigation/displayCurrentDirectory.js";
+import toUpDirectory from "./navigation/toUpDirectory.js";
 import copy from "./fs/copy.js";
 import list from "./fs/list.js";
 import read from "./fs/read.js";
@@ -10,9 +10,11 @@ import rename from "./fs/rename.js";
 import calculateHash from "./hash/calcHash.js";
 import compress from "./zip/compress.js";
 import decompress from "./zip/decompress.js";
-import toCertainDirectory from "./general/toCertainDirectory.js";
+import toCertainDirectory from "./navigation/toCertainDirectory.js";
 import move from "./fs/move.js";
 import remove from "./fs/delete.js";
+import eol from "./system/eol.js";
+import cpusInfo from "./system/cpusInfo.js";
 
 const args = process.argv;
 const usernameArg = args.find((arg) => arg.startsWith("--username="));
@@ -79,6 +81,21 @@ async function handleCommand(command) {
 
       case "rm": {
         await remove(args[0]);
+        break;
+      }
+
+      case "os": {
+        if (args[0] === "--EOL") eol();
+        if (args[0] === "--cpus") cpusInfo();
+        else {
+          process.stdout.write(
+            EOL +
+              `${unknownCommandColor}Unknown command: "${command}"` +
+              EOL +
+              EOL
+          );
+        }
+
         break;
       }
 
