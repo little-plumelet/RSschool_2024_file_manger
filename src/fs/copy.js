@@ -8,15 +8,15 @@ import { fileURLToPath } from "node:url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const copy = async (source, destination) => {
-  const resolvedSource = source.startsWith("./")
-    ? path.resolve(__dirname, "../", source)
-    : path.resolve(process.cwd(), source);
-  let resolvedDestination = destination.startsWith("./")
-    ? path.resolve(__dirname, "../", destination)
-    : path.resolve(process.cwd(), destination);
-
+async function copy(source, destination) {
   try {
+    const resolvedSource = source.startsWith("./")
+      ? path.resolve(__dirname, "../", source)
+      : path.resolve(process.cwd(), source);
+    let resolvedDestination = destination.startsWith("./")
+      ? path.resolve(__dirname, "../", destination)
+      : path.resolve(process.cwd(), destination);
+
     const fileStats = await stat(resolvedSource);
 
     if (!fileStats.isFile()) {
@@ -33,6 +33,6 @@ const copy = async (source, destination) => {
   } catch (err) {
     throw new Error(`FS operation failed ${EOL}${err.message}${EOL}`);
   }
-};
+}
 
 export default copy;

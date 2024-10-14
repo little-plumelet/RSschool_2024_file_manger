@@ -7,16 +7,16 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const rename = async (source, newName) => {
-  const resolvedPath = source.startsWith("./")
-    ? path.resolve(__dirname, "../", source)
-    : path.resolve(process.cwd(), source);
-
-  const newPath = `${resolvedPath
-    .split("/")
-    .slice(0, -1)
-    .join("/")}/${newName}`;
-
   try {
+    const resolvedPath = source.startsWith("./")
+      ? path.resolve(__dirname, "../", source)
+      : path.resolve(process.cwd(), source);
+
+    const newPath = `${resolvedPath
+      .split("/")
+      .slice(0, -1)
+      .join("/")}/${newName}`;
+
     await access(resolvedPath, constants.F_OK);
     try {
       await access(newPath, constants.F_OK);

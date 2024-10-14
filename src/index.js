@@ -11,6 +11,7 @@ import calculateHash from "./hash/calcHash.js";
 import compress from "./zip/compress.js";
 import decompress from "./zip/decompress.js";
 import toCertainDirectory from "./fs/toCertainDirectory.js";
+import move from "./fs/move.js";
 
 const args = process.argv;
 const usernameArg = args.find((arg) => arg.startsWith("--username="));
@@ -67,6 +68,11 @@ async function handleCommand(command) {
 
       case "cp": {
         await copy(args[0], args[1]);
+        break;
+      }
+
+      case "mv": {
+        await move(args[0], args[1]);
         break;
       }
 
