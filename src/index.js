@@ -17,15 +17,17 @@ import eol from "./system/eol.js";
 import cpusInfo from "./system/cpusInfo.js";
 import homeDirInfo from "./system/homeDirInfo.js";
 import userNameInfo from "./system/IuserNameInfo.js";
+import architectureInfo from "./system/architectureInfo.js";
+import welcomeUser from "./general/welcomeUser.js";
+import goodbyeUser from "./general/goodbyeUser.js";
 
 const args = process.argv;
 const usernameArg = args.find((arg) => arg.startsWith("--username="));
 let username = "Anonymous";
 
-const welcomeColor = "\x1b[34m";
 const promptColor = "\x1b[32m";
-const unknownCommandColor = "\x1b[31m";
 const resetColor = "\x1b[0m";
+const unknownCommandColor = "\x1b[31m";
 
 if (usernameArg) {
   username = usernameArg.split("=")[1];
@@ -91,6 +93,7 @@ async function handleCommand(command) {
         if (args[0] === "--cpus") cpusInfo();
         if (args[0] === "--homedir") homeDirInfo();
         if (args[0] === "--username") userNameInfo();
+        if (args[0] === "--architecture") architectureInfo();
         else {
           process.stdout.write(
             EOL +
@@ -140,9 +143,7 @@ async function handleCommand(command) {
   rl.prompt();
 }
 
-process.stdout.write(
-  EOL + `${welcomeColor}Welcome to the File Manager, ${username}!` + EOL
-);
+welcomeUser(username);
 displayCurrentDirectory(promptColor);
 
 rl.prompt();
@@ -152,11 +153,6 @@ rl.on("line", (input) => {
 });
 
 rl.on("close", () => {
-  process.stdout.write(
-    EOL +
-      `${welcomeColor}Thank you for using File Manager, ${username}, goodbye!` +
-      EOL +
-      EOL
-  );
+  goodbyeUser(username);
   process.exit(0);
 });
