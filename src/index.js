@@ -1,6 +1,7 @@
 import { EOL } from "os";
 import readline from "readline";
 import displayCurrentDirectory from "./fs/displayCurrentDirectory.js";
+import toUpDirectory from "./fs/toUpDirectory.js";
 import list from "./fs/list.js";
 import read from "./fs/read.js";
 import calculateHash from "./hash/calcHash.js";
@@ -30,6 +31,11 @@ async function handleCommand(command) {
   const [commandName, ...args] = command.trim().split(" ");
   try {
     switch (commandName) {
+      case "up": {
+        toUpDirectory();
+        break;
+      }
+
       case "ls": {
         await list();
         break;
