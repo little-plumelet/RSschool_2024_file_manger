@@ -1,12 +1,8 @@
 import path from "node:path";
-import { fileURLToPath } from "node:url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 function toCertainDirectory(directoryPath) {
-  const resolvedPath = directoryPath.startsWith("./")
-    ? path.resolve(__dirname, "../", directoryPath)
+  const resolvedPath = path.isAbsolute(directoryPath)
+    ? directoryPath
     : path.resolve(process.cwd(), directoryPath);
 
   const currentDirPath = process.cwd();

@@ -3,18 +3,15 @@ import { pipeline } from "node:stream/promises";
 import { stat } from "node:fs/promises";
 import { EOL } from "os";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 async function copy(source, destination) {
   try {
-    const resolvedSource = source.startsWith("./")
-      ? path.resolve(__dirname, "../", source)
+    const resolvedSource = path.isAbsolute(source)
+      ? source
       : path.resolve(process.cwd(), source);
-    let resolvedDestination = destination.startsWith("./")
-      ? path.resolve(__dirname, "../", destination)
+
+    let resolvedDestination = path.isAbsolute(destination)
+      ? destination
       : path.resolve(process.cwd(), destination);
 
     const fileStats = await stat(resolvedSource);

@@ -2,17 +2,15 @@ import { createReadStream, createWriteStream } from "node:fs";
 import { createBrotliCompress } from "node:zlib";
 import { pipeline } from "node:stream/promises";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 import { EOL } from "os";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 const compress = async (source, destination) => {
-  const resolvedSource = source.startsWith("./")
-    ? path.resolve(__dirname, "../", source)
+  const resolvedSource = path.isAbsolute(source)
+    ? source
     : path.resolve(process.cwd(), source);
-  const resolvedDestination = destination.startsWith("./")
-    ? path.resolve(__dirname, "../", destination)
+
+  let resolvedDestination = path.isAbsolute(destination)
+    ? destination
     : path.resolve(process.cwd(), destination);
 
   const sourceStream = createReadStream(resolvedSource);

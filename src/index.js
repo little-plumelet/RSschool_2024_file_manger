@@ -115,10 +115,7 @@ async function handleCommand(command) {
 
       default: {
         process.stdout.write(
-          EOL +
-            `${unknownCommandColor}Unknown command: "${command}"` +
-            EOL +
-            EOL
+          EOL + `${unknownCommandColor}Invalid input: "${command}"` + EOL + EOL
         );
         break;
       }

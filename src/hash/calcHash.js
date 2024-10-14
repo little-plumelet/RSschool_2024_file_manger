@@ -1,17 +1,13 @@
 import { createHash } from "node:crypto";
 import { createReadStream } from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 import { EOL } from "os";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const calculateHash = async (filePath) => {
   try {
     return new Promise((resolve, reject) => {
-      const resolvedPath = filePath.startsWith("./")
-        ? path.resolve(__dirname, "../", filePath)
+      const resolvedPath = path.isAbsolute(filePath)
+        ? filePath
         : path.resolve(process.cwd(), filePath);
       const hash = createHash("sha256");
 
