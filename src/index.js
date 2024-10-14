@@ -16,6 +16,7 @@ import remove from "./fs/delete.js";
 import eol from "./system/eol.js";
 import cpusInfo from "./system/cpusInfo.js";
 import homeDirInfo from "./system/homeDirInfo.js";
+import userNameInfo from "./system/IuserNameInfo.js";
 
 const args = process.argv;
 const usernameArg = args.find((arg) => arg.startsWith("--username="));
@@ -89,6 +90,7 @@ async function handleCommand(command) {
         if (args[0] === "--EOL") eol();
         if (args[0] === "--cpus") cpusInfo();
         if (args[0] === "--homedir") homeDirInfo();
+        if (args[0] === "--username") userNameInfo();
         else {
           process.stdout.write(
             EOL +
