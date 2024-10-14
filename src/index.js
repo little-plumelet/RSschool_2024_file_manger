@@ -2,6 +2,7 @@ import { EOL } from "os";
 import readline from "readline";
 import displayCurrentDirectory from "./functions/displayCurrentDirectory.js";
 import list from "./functions/list.js";
+import read from "./functions/read.js";
 
 const args = process.argv;
 const usernameArg = args.find((arg) => arg.startsWith("--username="));
@@ -23,24 +24,38 @@ const rl = readline.createInterface({
 });
 
 async function handleCommand(command) {
-  switch (command.trim()) {
-    case "ls": {
-      await list();
-      break;
+  const [commandName, ...args] = command.trim().split(" ");
+  try {
+    switch (commandName) {
+      case "ls": {
+        await list();
+        break;
+      }
+
+      case "cat": {
+        await read(args[0]);
+        break;
+      }
+
+      case "exit": {
+        process.stdout.write(
+          `Thank you for using File Manager, ${username}, goodbye!` + EOL + EOL
+        );
+        rl.close();
+        break;
+      }
+      default: {
+        process.stdout.write(
+          EOL +
+            `${unknownCommandColor}Unknown command: "${command}"` +
+            EOL +
+            EOL
+        );
+        break;
+      }
     }
-    case ".exit": {
-      process.stdout.write(
-        `Thank you for using File Manager, ${username}, goodbye!` + EOL + EOL
-      );
-      rl.close();
-      break;
-    }
-    default: {
-      process.stdout.write(
-        EOL + `${unknownCommandColor}Unknown command: "${command}"` + EOL + EOL
-      );
-      break;
-    }
+  } catch (error) {
+    process.stdout.write(EOL + `${unknownCommandColor}${error}` + EOL);
   }
   displayCurrentDirectory(promptColor);
   rl.prompt();

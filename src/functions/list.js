@@ -5,7 +5,6 @@ const list = async () => {
   try {
     const currentDirectory = process.cwd();
     const files = await readdir(currentDirectory, { withFileTypes: true });
-    console.log(files);
     const tableData = files
       .map((file) => {
         const isDirectory = statSync(
