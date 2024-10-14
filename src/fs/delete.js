@@ -13,7 +13,7 @@ const remove = async (filePath) => {
       : path.resolve(process.cwd(), filePath);
     await unlink(resolvedPath);
   } catch (err) {
-    throw new Error(`FS operation failed - ${err.message}${EOL}`);
+    throw new Error(`FS operation failed - ${err.message + EOL}`);
   }
 };
 

@@ -5,7 +5,7 @@ const create = async (fileName) => {
   try {
     await writeFile(`src/${fileName}`, "", { flag: "wx+" });
   } catch (err) {
-    throw new Error(`FS operation failed${EOL}${err.message}${EOL}`);
+    throw new Error(`FS operation failed - ${err.message + EOL}`);
   }
 };
 

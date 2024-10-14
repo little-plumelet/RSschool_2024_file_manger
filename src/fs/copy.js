@@ -31,7 +31,7 @@ async function copy(source, destination) {
 
     await pipeline(readStream, writeStream);
   } catch (err) {
-    throw new Error(`FS operation failed ${EOL}${err.message}${EOL}`);
+    throw new Error(`FS operation failed - ${err.message + EOL}`);
   }
 }
 

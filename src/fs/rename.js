@@ -25,7 +25,7 @@ const rename = async (source, newName) => {
       await renameFile(resolvedPath, newPath);
     }
   } catch (err) {
-    throw new Error(`FS operation failed ${EOL}${err.message}${EOL}`);
+    throw new Error(`FS operation failed - ${err.message + EOL}`);
   }
 };
 

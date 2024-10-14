@@ -1,5 +1,6 @@
 import { readdir } from "node:fs/promises";
 import { statSync } from "node:fs";
+import { EOL } from "os";
 
 const list = async () => {
   try {
@@ -23,7 +24,7 @@ const list = async () => {
       });
     console.table(tableData);
   } catch (err) {
-    throw new Error("FS operation failed");
+    throw new Error(`FS operation failed - ${(err.message, EOL)}`);
   }
 };
 
