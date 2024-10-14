@@ -4,6 +4,8 @@ import displayCurrentDirectory from "./fs/displayCurrentDirectory.js";
 import list from "./fs/list.js";
 import read from "./fs/read.js";
 import calculateHash from "./hash/calcHash.js";
+import compress from "./zip/compress.js";
+import decompress from "./zip/decompress.js";
 
 const args = process.argv;
 const usernameArg = args.find((arg) => arg.startsWith("--username="));
@@ -40,6 +42,16 @@ async function handleCommand(command) {
 
       case "hash": {
         await calculateHash(args[0]);
+        break;
+      }
+
+      case "compress": {
+        await compress(args[0], args[1]);
+        break;
+      }
+
+      case "decompress": {
+        await decompress(args[0], args[1]);
         break;
       }
 
