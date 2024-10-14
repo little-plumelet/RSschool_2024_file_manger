@@ -12,6 +12,7 @@ import compress from "./zip/compress.js";
 import decompress from "./zip/decompress.js";
 import toCertainDirectory from "./fs/toCertainDirectory.js";
 import move from "./fs/move.js";
+import remove from "./fs/delete.js";
 
 const args = process.argv;
 const usernameArg = args.find((arg) => arg.startsWith("--username="));
@@ -73,6 +74,11 @@ async function handleCommand(command) {
 
       case "mv": {
         await move(args[0], args[1]);
+        break;
+      }
+
+      case "rm": {
+        await remove(args[0]);
         break;
       }
 
