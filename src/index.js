@@ -13,14 +13,15 @@ import decompress from "./zip/decompress.js";
 import toCertainDirectory from "./navigation/toCertainDirectory.js";
 import move from "./fs/move.js";
 import remove from "./fs/delete.js";
-import eol from "./system/eol.js";
-import cpusInfo from "./system/cpusInfo.js";
-import homeDirInfo from "./system/homeDirInfo.js";
-import userNameInfo from "./system/userNameInfo.js";
-import architectureInfo from "./system/architectureInfo.js";
+// import eol from "./system/eol.js";
+// import cpusInfo from "./system/cpusInfo.js";
+// import homeDirInfo from "./system/homeDirInfo.js";
+// import userNameInfo from "./system/userNameInfo.js";
+// import architectureInfo from "./system/architectureInfo.js";
 import welcomeUser from "./general/welcomeUser.js";
 import goodbyeUser from "./general/goodbyeUser.js";
 import { colors } from "./colors.js";
+import osCommandsHandler from "./osCommandsHandler.js";
 
 const args = process.argv;
 const usernameArg = args.find((arg) => arg.startsWith("--username="));
@@ -88,20 +89,7 @@ async function handleCommand(command) {
       }
 
       case "os": {
-        if (args[0] === "--EOL") eol();
-        if (args[0] === "--cpus") cpusInfo();
-        if (args[0] === "--homedir") homeDirInfo();
-        if (args[0] === "--username") userNameInfo();
-        if (args[0] === "--architecture") architectureInfo();
-        else {
-          process.stdout.write(
-            EOL +
-              `${unknownCommandColor}Unknown command: "${command}"` +
-              EOL +
-              EOL
-          );
-        }
-
+        osCommandsHandler(args, unknownCommandColor);
         break;
       }
 
