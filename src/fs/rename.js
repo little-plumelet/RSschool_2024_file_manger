@@ -7,8 +7,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const rename = async (source, newName) => {
-  console.log(source);
-  console.log(newName);
   const resolvedPath = source.startsWith("./")
     ? path.resolve(__dirname, "../", source)
     : path.resolve(process.cwd(), source);
@@ -17,8 +15,7 @@ const rename = async (source, newName) => {
     .split("/")
     .slice(0, -1)
     .join("/")}/${newName}`;
-  console.log("resol = ", resolvedPath);
-  console.log(newPath);
+
   try {
     await access(resolvedPath, constants.F_OK);
     try {
@@ -28,7 +25,7 @@ const rename = async (source, newName) => {
       await renameFile(resolvedPath, newPath);
     }
   } catch (err) {
-    throw new Error("FS operation failed");
+    throw new Error(`FS operation failed ${EOL}${err.message}${EOL}`);
   }
 };
 
