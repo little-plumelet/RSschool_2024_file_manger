@@ -1,7 +1,7 @@
 import { EOL } from "os";
+import { colors } from "../colors.js";
 
-const goodbyeColor = "\x1b[34m";
-const resetColor = "\x1b[0m";
+const { welcomeColor: goodbyeColor, resetColor } = colors;
 
 export function goodbyeUser(username) {
   process.stdout.write(

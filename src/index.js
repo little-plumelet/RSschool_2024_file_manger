@@ -16,18 +16,17 @@ import remove from "./fs/delete.js";
 import eol from "./system/eol.js";
 import cpusInfo from "./system/cpusInfo.js";
 import homeDirInfo from "./system/homeDirInfo.js";
-import userNameInfo from "./system/IuserNameInfo.js";
+import userNameInfo from "./system/userNameInfo.js";
 import architectureInfo from "./system/architectureInfo.js";
 import welcomeUser from "./general/welcomeUser.js";
 import goodbyeUser from "./general/goodbyeUser.js";
+import { colors } from "./colors.js";
 
 const args = process.argv;
 const usernameArg = args.find((arg) => arg.startsWith("--username="));
 let username = "Anonymous";
 
-const promptColor = "\x1b[32m";
-const resetColor = "\x1b[0m";
-const unknownCommandColor = "\x1b[31m";
+const { promptColor, resetColor, unknownCommandColor } = colors;
 
 if (usernameArg) {
   username = usernameArg.split("=")[1];
